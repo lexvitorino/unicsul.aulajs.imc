@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="style7.css" rel="stylesheet">
+	<title>CÁLCULO DO IMC</title>
+
+	<head>
+		<script>
+			function imc() {
+				var valorAlt = document.f_imc.f_alt.value;
+				var valorPeso = document.f_imc.f_pes.value;
+				var valorSexo = document.f_imc.f_sex.value;
+
+				if ((valorAlt == 0) || (valorPeso == 0)) {
+					alert("Digite o peso ou altura");
+				} else {
+					var valt = valorAlt.replace(",", ".");
+					var vpes = valorPeso.replace(",", ".");
+
+					var calc = vpes / Math.pow(valt, 2);
+					var vimc = (calc).toFixed(1);
+					var cat = "";
+
+					if ((valorSexo === "M" && calc < 19.1) || (valorSexo === "F" && calc < 20.7)) {
+						cat = "Abaixo do peso";
+					} else if ((valorSexo === "M" && calc < 25.8) || (valorSexo === "F" && calc < 26.4)) {
+						cat = "Normal";
+					} else if ((valorSexo === "M" && calc < 27.3) || (valorSexo === "F" && calc < 27.8)) {
+						cat = "Pouco acima do peso";
+					} else if ((valorSexo === "M" && calc < 32.3) || (valorSexo === "F" && calc < 31.1)) {
+						cat = "Acima do peso";
+					} else {
+						cat = "Obeso";
+					}
+
+					document.getElementById("resul").value = (`O IMC é: ${vimc} Você entra na categoria: ${cat}`);
+				}
+			}
+
+		</script>
+	</head>
+
+<body>
+
+	<div class="container">
+		<form class="form" name="f_imc">
+			<div>
+				<label class="title">Altura</label>
+				<input type="text" name="f_alt" value="">
+			</div>
+			<div>
+				<label class="title">Peso</label>
+				<input type="text" name="f_pes" value="">
+			</div>
+			<div>
+				<label class="title">Sexo</label><br>
+				<input type="radio" name="f_sex" id="sexoM" value="M" checked>
+				<label for="sexoM">Masculino</label>
+				<input type="radio" name="f_sex" id="sexoF" value="F">
+				<label for="sexoF">Feminino</label>
+			</div>
+			<div>
+				<label class="title">Resultado</label>
+				<input type="text" id="resul" value="" disabled="disabled">
+			</div>
+			<div>
+				<button type="button" onclick="imc()">
+					Calcular
+				</button>
+			</div>
+		</form>
+		
+		<table>
+			<tr>
+				<th>Condição</th>
+				<th>Mulheres</th>
+				<th>Homens</th>
+			</tr>
+			<tr>
+				<td>Abaixo do peso</td>
+				<td>
+					< 19,1 </td>
+				<td>
+					< 20,7 </td>
+			</tr>
+			<tr>
+				<td>Normal</td>
+				<td> 19,1 - 25,8 </td>
+				<td> 20,7 - 26,4 </td>
+			</tr>
+			<tr>
+				<td>Pouco acima do peso</td>
+				<td> 25,9 - 27,3 </td>
+				<td> 26,5 - 27,8 </td>
+			</tr>
+			<tr>
+				<td>Acima do peso</td>
+				<td> 27,4 - 32,3 </td>
+				<td> 27,9 - 31,1 </td>
+			</tr>
+			<tr>
+				<td>Obeso</td>
+				<td> > 32,3 </td>
+				<td> > 31,1 </td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+
+</html>
